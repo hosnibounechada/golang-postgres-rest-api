@@ -1,0 +1,5 @@
+migrate create -ext <migration_extension> -dir <migrations_directory> <migration_name>
+migrate create -ext sql -dir ./migrations create_user_table
+
+migrate -path <path_to_migrations_directory> -database <database_url> up
+migrate -path ./migrations -database "postgres://postgres:password@localhost:5432/gindb?sslmode=disable" up

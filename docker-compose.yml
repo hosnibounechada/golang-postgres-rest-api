@@ -1,0 +1,31 @@
+services:
+  web:
+    container_name: web
+    build:
+      dockerfile: /Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: password
+      DB_NAME: gindb
+      DB_SSLMODE: disable
+
+  db:
+    container_name: db
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: gindb
+    volumes:
+      - postgres-data-go:/var/lib/postgresql/data
+
+volumes:
+  postgres-data-go:
